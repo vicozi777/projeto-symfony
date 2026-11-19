@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>{{ categoria ? 'Editar categoria' : 'Nova categoria' }}</h1>
+
+    <form method="post">
+        <label for="nome">Nome</label>
+        <input type="text" id="nome" name="nome" value="{{ categoria ? categoria.nome : '' }}" required>
+
+        <button type="submit">Salvar</button>
+        <a href="{{ path('categoria_listar') }}">Cancelar</a>
+    </form>
+{% endblock %}

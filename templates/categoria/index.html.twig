@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<h1>Categorias</h1>
+
+<a href="{{ path('categoria_nova') }}">Nova categoria</a>
+
+<table>
+    <tr>
+        <th>Nome</th>
+        <th>Ações</th>
+    </tr>
+    {% for categoria in categorias %}
+    <tr>
+        <td>{{ categoria.nome }}</td>
+        <td>
+            <a href="{{ path('categoria_editar', {id: categoria.id}) }}">Editar</a>
+            <form action="{{ path('categoria_excluir', {id: categoria.id}) }}" method="post" style="display:inline">
+                <button type="submit">Excluir</button>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

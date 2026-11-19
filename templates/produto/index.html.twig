@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Produtos</h1>
+
+    <a href="{{ path('produto_novo') }}">Novo produto</a>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Categoria</th>
+                <th>Estoque</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for produto in produtos %}
+                <tr>
+                    <td>{{ produto.nome }}</td>
+                    <td>{{ produto.categoria.nome }}</td>
+                    <td>{{ produto.quantidade }}</td>
+                    <td>
+                        <form method="post" action="{{ path('produto_adicionar', {id: produto.id}) }}" style="display:inline">
+                            <input type="number" name="quantidade" value="1" min="1" style="width:60px">
+                            <button type="submit">Adicionar</button>
+                        </form>
+
+                        <form method="post" action="{{ path('produto_remover', {id: produto.id}) }}" style="display:inline">
+                            <input type="number" name="quantidade" value="1" min="1" style="width:60px">
+                            <button type="submit">Remover</button>
+                        </form>
+
+                        <a href="{{ path('produto_editar', {id: produto.id}) }}">Editar</a>
+
+                        <form method="post" action="{{ path('produto_excluir', {id: produto.id}) }}" style="display:inline" onsubmit="return confirm('Excluir este produto?')">
+                            <button type="submit">Excluir</button>
+                        </form>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4">Nenhum produto cadastrado.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
